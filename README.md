@@ -17,8 +17,19 @@ It allows users to track food, water intake, set fitness goals, and monitor prog
 
 **📸 Screenshots**
 
-![Dashboard](OUTPUT/img1.png) | ![Profile](OUTPUT/img2.png)
-![Dashboard](OUTPUT/img3.png) | ![Profile](OUTPUT/img4.png)
+LOGIN DETAILS
+![Dashboard](OUTPUT/img1.png) 
+
+DASHBOARD
+![Profile](OUTPUT/img2.png)
+
+FOOD INTAKE ENTRY
+![Dashboard](OUTPUT/img3.png) 
+
+WATER INTAKE TRACKER
+![Profile](OUTPUT/img4.png)
+
+PROFILE PAGE
 ![Dashboard](OUTPUT/img5.png) | 
 
 ---
