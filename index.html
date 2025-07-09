@@ -1,0 +1,435 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="LOGO.png" />
+
+    <title>FitTracker Pro</title>
+      <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <!-- Login Screen -->
+        <div id="loginScreen" class="animate-bounce-in">
+            <div class="glass-card neon-glow" style="max-width: 600px; margin: 2rem auto;">
+                <div class="header">
+                    <div class="logo-container">
+  <img src="LOGO.png" alt="User Logo" class="app-logo-img" />
+  <h1 class="app-title">FitTracker Pro</h1>
+</div>
+                    <p style="color: var(--text-muted);">
+                        Let's set up your profile to get started on your fitness journey
+                    </p>
+                </div>
+                <form id="userProfileForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" min="16" max="100" value="25" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select id="gender" required>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="height">Height (cm)</label>
+                            <input type="number" id="height" min="100" max="250" value="170" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="weight">Weight (kg)</label>
+                            <input type="number" id="weight" min="30" max="200" value="70" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bodyFat">Body Fat (%)</label>
+                            <input type="number" id="bodyFat" min="5" max="50" value="15" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Create Profile</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main App -->
+        <div id="mainApp" class="hidden">
+            <!-- Header -->
+            <div class="header">
+                 <div class="logo-container">
+  <img src="LOGO.png" alt="User Logo" class="app-logo-img" />
+  <h1 class="app-title">FitTracker Pro</h1>
+</div>
+                <p id="welcomeMessage" style="color: var(--text-muted);">
+                    Welcome back! Let's crush those goals today 💪
+                </p>
+            </div>
+
+            <!-- Navigation -->
+            <div class="tabs">
+                <button class="tab active" data-tab="dashboard">
+                    📊 Dashboard
+                </button>
+                <button class="tab" data-tab="food">
+                    🍽️ Food
+                </button>
+                <button class="tab" data-tab="water">
+                    💧 Water
+                </button>
+                <button class="tab" data-tab="profile">
+                    👤 Profile
+                </button>
+            </div>
+
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active animate-slide-up">
+                <div class="dashboard-grid">
+                    <div class="glass-card neon-glow stat-card">
+                        <div class="stat-value" id="currentWeight" style="color: var(--primary);">70 kg</div>
+                        <div class="stat-label">Current Weight</div>
+                        <div class="stat-label" id="bodyFatDisplay">Body Fat: 15%</div>
+                    </div>
+                    <div class="glass-card neon-glow stat-card">
+                        <div class="stat-value" id="bmiValue" style="color: var(--secondary);">24.2</div>
+                        <div class="stat-label">BMI</div>
+                        <div class="stat-label">Normal range</div>
+                    </div>
+                    <div class="glass-card neon-glow stat-card">
+                        <div class="stat-value" id="dailyCalories" style="color: var(--accent);">0</div>
+                        <div class="stat-label">Daily Calories</div>
+                        <div class="stat-label" id="calorieGoal">Goal: 2000</div>
+                    </div>
+                    <div class="glass-card neon-glow stat-card">
+                        <div class="stat-value" style="color: var(--warning);">4</div>
+                        <div class="stat-label">Workout Days</div>
+                        <div class="stat-label">This week</div>
+                    </div>
+                </div>
+
+                <!-- Progress Circles -->
+                <div class="dashboard-grid">
+                    <div class="glass-card neon-glow circular-progress">
+                        <div class="progress-circle">
+                            <svg>
+                                <defs>
+                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:var(--primary)"/>
+                                        <stop offset="100%" style="stop-color:var(--secondary)"/>
+                                    </linearGradient>
+                                </defs>
+                                <circle class="progress-bg" cx="60" cy="60" r="45"/>
+                                <circle class="progress-fill" id="proteinProgress" cx="60" cy="60" r="45"/>
+                            </svg>
+                            <div class="progress-text" id="proteinPercent">0%</div>
+                        </div>
+                        <div>
+                            <div id="proteinCurrent">0g / 140g</div>
+                            <div style="color: var(--text-muted); font-size: 0.85rem;">Protein</div>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card neon-glow circular-progress">
+                        <div class="progress-circle">
+                            <svg>
+                                <circle class="progress-bg" cx="60" cy="60" r="45"/>
+                                <circle class="progress-fill" id="calorieProgress" cx="60" cy="60" r="45"/>
+                            </svg>
+                            <div class="progress-text" id="caloriePercent">0%</div>
+                        </div>
+                        <div>
+                            <div id="calorieCurrent">0 / 2000 kcal</div>
+                            <div style="color: var(--text-muted); font-size: 0.85rem;">Calories</div>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card neon-glow circular-progress">
+                        <div class="progress-circle">
+                            <svg>
+                                <circle class="progress-bg" cx="60" cy="60" r="45"/>
+                                <circle class="progress-fill" id="waterProgress" cx="60" cy="60" r="45"/>
+                            </svg>
+                            <div class="progress-text" id="waterPercent">0%</div>
+                        </div>
+                        <div>
+                            <div id="waterCurrent">0ml / 2450ml</div>
+                            <div style="color: var(--text-muted); font-size: 0.85rem;">Water</div>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card neon-glow circular-progress">
+                        <div class="progress-circle">
+                            <svg>
+                                <circle class="progress-bg" cx="60" cy="60" r="45"/>
+                                <circle class="progress-fill" id="macroProgress" cx="60" cy="60" r="45"/>
+                            </svg>
+                            <div class="progress-text" id="macroPercent">0%</div>
+                        </div>
+                        <div>
+                            <div id="macroCurrent">0g / 315g</div>
+                            <div style="color: var(--text-muted); font-size: 0.85rem;">Macros</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suggestions -->
+                <div class="glass-card animate-slide-up">
+                    <h3 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        ❤️ Personalized Suggestions
+                    </h3>
+                    <div id="suggestionsContainer">
+                        <div style="text-align: center; padding: 2rem;">
+                            <div style="font-size: 2rem; margin-bottom: 1rem;">🎉</div>
+                            <p style="color: var(--text-muted);">
+                                You're doing great! Keep up the excellent work with your nutrition and fitness goals.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Food Tab -->
+            <div id="food" class="tab-content">
+                <div class="glass-card animate-slide-up">
+                    <h3 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        ➕ Add Food Entry
+                    </h3>
+                    <form id="addFoodForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="foodName">Food Name</label>
+                                <input type="text" id="foodName" placeholder="e.g. chicken breast" required>
+                                <div id="foodSuggestions" class="hidden" style="position: absolute; background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; margin-top: 4px; z-index: 10; width: 100%; max-width: 300px;"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="foodGrams">Weight (grams)</label>
+                                <input type="number" id="foodGrams" placeholder="e.g. 150" min="1" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Add Food Entry</button>
+                    </form>
+                </div>
+
+                <!-- Nutrition Summary -->
+                <div class="glass-card animate-slide-up">
+                    <h3 style="margin-bottom: 1rem;">Today's Nutrition Summary</h3>
+                    <div class="nutrition-grid">
+                        <div class="nutrition-item">
+                            <div class="nutrition-value" id="totalCalories" style="color: var(--primary);">0</div>
+                            <div class="nutrition-label">Calories</div>
+                            <div class="nutrition-goal" id="caloriesGoalText">Goal: 2000</div>
+                        </div>
+                        <div class="nutrition-item">
+                            <div class="nutrition-value" id="totalProtein" style="color: var(--secondary);">0g</div>
+                            <div class="nutrition-label">Protein</div>
+                            <div class="nutrition-goal" id="proteinGoalText">Goal: 140g</div>
+                        </div>
+                        <div class="nutrition-item">
+                            <div class="nutrition-value" id="totalCarbs" style="color: var(--accent);">0g</div>
+                            <div class="nutrition-label">Carbs</div>
+                            <div class="nutrition-goal" id="carbsGoalText">Goal: 250g</div>
+                        </div>
+                        <div class="nutrition-item">
+                            <div class="nutrition-value" id="totalFat" style="color: var(--warning);">0g</div>
+                            <div class="nutrition-label">Fat</div>
+                            <div class="nutrition-goal" id="fatGoalText">Goal: 70g</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Food Entries -->
+                <div class="glass-card animate-slide-up">
+                    <h3 style="margin-bottom: 1rem;">Today's Food Entries</h3>
+                    <div id="foodEntries" class="food-entries">
+                        <p style="text-align: center; color: var(--text-muted); padding: 2rem;">
+                            No food entries for today. Start tracking your nutrition above!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Water Tab -->
+            <div id="water" class="tab-content">
+                <div class="glass-card neon-glow animate-slide-up">
+                    <h3 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        💧 Water Intake Tracker
+                    </h3>
+                    
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <div class="water-glass">
+                            <div class="water-level" id="waterLevel" style="height: 0%;"></div>
+                            <div class="water-text">
+                                <div id="waterPercentage">0%</div>
+                                <div style="font-size: 0.85rem;" id="waterAmount">0ml</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.5rem;">
+                            <span>Daily Goal Progress</span>
+                            <span id="waterGoalText">0ml / 2450ml</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill-bar" id="waterProgressBar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+
+                    <div id="waterStatus" style="text-align: center; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 8px; margin-bottom: 1.5rem;">
+                        <div style="color: var(--text-muted);">
+                            You need <span id="waterRemaining">2450ml</span> more to reach your daily goal
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 1rem;">
+                        <h4 style="margin-bottom: 0.75rem;">Quick Add</h4>
+                        <div class="quick-add-grid">
+                            <button class="btn btn-outline" onclick="addWater(250)">+ 250ml</button>
+                            <button class="btn btn-outline" onclick="addWater(500)">+ 500ml</button>
+                            <button class="btn btn-outline" onclick="addWater(750)">+ 750ml</button>
+                            <button class="btn btn-outline" onclick="addWater(1000)">+ 1000ml</button>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 0.75rem; margin-bottom: 1rem;">
+                        <button class="btn btn-outline" style="flex: 1;" onclick="addWater(100)">+100ml</button>
+                        <button class="btn btn-outline" style="flex: 1;" onclick="addWater(-100)" id="removeWaterBtn">-100ml</button>
+                    </div>
+
+                    <button class="btn btn-outline btn-full" onclick="resetWater()" id="resetWaterBtn">Reset Daily Intake</button>
+                </div>
+            </div>
+
+            <!-- Profile Tab -->
+            <div id="profile" class="tab-content">
+                <div class="glass-card animate-slide-up">
+                    <h3 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        👤 Personal Information
+                    </h3>
+                    <form id="updateProfileForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="updateName">Name</label>
+                                <input type="text" id="updateName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="updateAge">Age</label>
+                                <input type="number" id="updateAge" min="16" max="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="updateGender">Gender</label>
+                                <select id="updateGender" required>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="updateHeight">Height (cm)</label>
+                                <input type="number" id="updateHeight" min="100" max="250" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="updateWeight">Weight (kg)</label>
+                                <input type="number" id="updateWeight" min="30" max="200" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="updateBodyFat">Body Fat (%)</label>
+                                <input type="number" id="updateBodyFat" min="5" max="50" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Update Profile</button>
+                    </form>
+                </div>
+
+                <!-- Goal Setting -->
+                <div class="glass-card animate-slide-up">
+                    <h3 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        📅 Daily Goals Setting
+                    </h3>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <div>
+                            <h4>Recommended Values</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">
+                                Based on your age, weight, height, and moderate activity level
+                            </p>
+                        </div>
+                        <button type="button" class="btn btn-outline" onclick="applyRecommendedGoals()">
+                            Apply Recommended
+                        </button>
+                    </div>
+                    <form id="goalsForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="dailyCalories">Daily Calories</label>
+                                <input type="number" id="dailyCalories" min="1200" max="5000" required>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;" id="caloriesRec">
+                                    Recommended: 2000 kcal
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label for="dailyProtein">Daily Protein (g)</label>
+                                <input type="number" id="dailyProtein" min="50" max="300" required>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;" id="proteinRec">
+                                    Recommended: 140g (2g per kg body weight)
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label for="dailyCarbs">Daily Carbohydrates (g)</label>
+                                <input type="number" id="dailyCarbs" min="50" max="500" required>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;" id="carbsRec">
+                                    Recommended: 250g
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label for="dailyFat">Daily Fat (g)</label>
+                                <input type="number" id="dailyFat" min="20" max="200" required>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;" id="fatRec">
+                                    Recommended: 70g (1g per kg body weight)
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label for="dailyWater">Daily Water (ml)</label>
+                                <input type="number" id="dailyWater" min="1000" max="5000" required>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;" id="waterRec">
+                                    Recommended: 2450ml (35ml per kg body weight)
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label for="workoutDays">Workout Days per Week</label>
+                                <input type="number" id="workoutDays" min="1" max="7" value="4" required>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">
+                                    Aim for 3-5 workout days per week
+                                </p>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Update Goals</button>
+                    </form>
+                </div>
+
+                <!-- Account Actions -->
+                <div class="glass-card">
+                    <h3 style="text-align: center; margin-bottom: 1rem;">Account Actions</h3>
+                    <div class="account-actions">
+                        <button class="btn btn-outline" onclick="logout()">
+                            🚪 Logout
+                        </button>
+                        <button class="btn btn-danger" onclick="resetAllData()">
+                            🗑️ Reset All Data
+                        </button>
+                    </div>
+                    <div class="account-info">
+                        <p><strong>Logout:</strong> Return to login screen (data preserved)</p>
+                        <p><strong>Reset All Data:</strong> Permanently delete all your data</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <script src="script.js"></script>
+</body>
+</html>
