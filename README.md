@@ -2,6 +2,8 @@
 FitTracker Pro is a modern, responsive fitness tracking web application for gym-goers. 
 It allows users to track food, water intake, set fitness goals, and monitor progress daily — all within a clean, animated UI.
 
+---
+
 **Features**
 - 📝 User profile setup (name, age, height, weight, etc.)
 - 🎯 Daily goals for calories, protein, carbs, fat, and water
@@ -16,7 +18,10 @@ It allows users to track food, water intake, set fitness goals, and monitor prog
 **📸 Screenshots**
 
 ![Dashboard](OUTPUT/img1.png) | ![Profile](OUTPUT/img2.png)
+![Dashboard](OUTPUT/img3.png) | ![Profile](OUTPUT/img4.png)
+![Dashboard](OUTPUT/img5.png) | 
 
+---
 
 **🛠 Tech Stack**
 
@@ -24,6 +29,8 @@ It allows users to track food, water intake, set fitness goals, and monitor prog
 - CSS3 (with custom variables + effects)
 - JavaScript (Vanilla)
 - LocalStorage
+
+---
 
 **🧾 License**
 
